@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br" >
+<head>
+	<meta charset="UTF-8">
+	<title>Colour Guessing</title>
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v6.0.0/css/all.css'>
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v6.0.0/css/fontawesome.css'><link rel="stylesheet" href="./style.css">
+	<script src="script.js"></script>
+	<!-- Special thanks to :
+		Mohithpoojary, for the form template,
+		W3Schools, for the answer counter,
+		Stack Overflow, for the contribution with pure js,
+		The Color API, for the colour schemes,
+		@vicblima ♥ for the project idea -->
+</head>
+<body>
+<div class="container">
+	<div class="screen">
+		<div class="screen__content">
+			<div class="form" id="form">
+				<div class="form__field">
+					<i class="form__icon fa-solid fa-r"></i>
+					<input type="number" class="form__input" id="redGuess" placeholder="Red" value=0 max=255 min=0>
+				</div>
+				<div class="form__field">
+					<i class="form__icon fa-solid fa-g"></i>
+					<input type="number" class="form__input" id="greenGuess" placeholder="Green" value=0>
+				</div>
+				<div class="form__field">
+					<i class="form__icon fa-solid fa-b"></i>
+					<input type="number" class="form__input" id="blueGuess" placeholder="Blue" value=0>
+				</div>
+				<button class="button form__submit" onclick="verifyAnswer();">
+					<span class="button__text">Enviar palpite</span>
+					<i class="button__icon fas fa-chevron-right"></i>
+				</button>
+			</div>
+
+			<div class="answer" id="answer" style="display:none">
+				<div class="form__field">
+					<h2>Sua pontuação é: </h2>
+					<h1 id="score">18</h1>
+					<p>A resposta correta seria:</p>
+					<div id="progress">
+						<div id="redProgress"><b>365</b></div>
+					</div>
+					<div id="progress">
+						<div id="greenProgress"><b>365</b></div>
+					</div>
+					<div id="progress">
+						<div id="blueProgress"><b>365</b></div>
+					</div>
+				</div>
+				<button class="button form__submit" onclick="window.location.reload();">
+					<span class="button__text">Tentar novamente</span>
+					<i class="button__icon fas fa-chevron-right"></i>
+				</button>
+			</div>
+
+		</div>
+		<div class="screen__background">
+			<span class="shape shape4"></span>
+			<span class="shape shape3"></span>
+			<span class="shape shape2"></span>
+			<span class="shape shape1"></span>
+		</div>
+	</div>
+</div>
+</body>
+</html>
