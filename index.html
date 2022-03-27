@@ -4,24 +4,24 @@
 	<meta charset="UTF-8">
 	<title>Colour Guessing</title>
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v6.0.0/css/all.css'>
-	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v6.0.0/css/fontawesome.css'><link rel="stylesheet" href="./style.css">
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v6.0.0/css/fontawesome.css'>
+	<link rel="stylesheet" href="./style.css">
 	<script src="script.js"></script>
 	<!-- Special thanks to :
-		Mohithpoojary, for the form template,
-		W3Schools, for the answer counter,
-		Stack Overflow, for the contribution with pure js,
-		The Color API, for the colour schemes,
-		@vicblima ♥ for the project idea -->
+       Mohithpoojary, for the form template,
+       W3Schools, for the answer counter,
+       Stack Overflow, for the contribution with pure js,
+       The Color API, for the colour schemes,
+       bensound.com, for the sounds,
+       @vicblima ♥ for the project idea -->
 </head>
 <body>
-
 <div class="info">
 	<i class="fa-solid fa-star-half-stroke"></i>
 	<h2 id="highScore">0</h2>
 	<i class="fa-solid fa-flag"></i>
 	<h2 id="roundCount">0</h2>
 </div>
-
 <div class="container">
 	<div class="screen">
 		<div class="screen__content">
@@ -39,34 +39,33 @@
 					<input type="number" class="form__input" id="blueGuess" placeholder="Blue" value=0>
 				</div>
 				<button class="button form__submit" onclick="verifyAnswer();">
-					<span class="button__text">Enviar palpite</span>
+					<span class="button__text">Send guess</span>
 					<i class="button__icon fas fa-chevron-right"></i>
 				</button>
 			</div>
-
-			<div class="answer" id="answer" style="display:none">
+			<div class="answer" id="answer">
 				<div class="form__field">
-					<h2>Sua pontuação é: </h2>
-					<h1 id="score">18</h1>
+					<h2>Your score: </h2>
+					<h1 id="score"></h1>
 					<div class="progress">
-						<div id="redProgress"><b>365</b></div>
+						<div id="redProgress"></div>
 					</div>
 					<div class="progress">
-						<div id="greenProgress"><b>365</b></div>
+						<div id="greenProgress"></div>
 					</div>
 					<div class="progress">
-						<div id="blueProgress"><b>365</b></div>
+						<div id="blueProgress"></div>
 					</div>
 				</div>
-				<p id="lblGuess">Seu palpite foi:</p>
+				<p id="lblGuess"></p>
 				<button class="button form__submit" onclick="start();">
-					<span class="button__text">Tentar novamente</span>
+					<span class="button__text">Try again</span>
 					<i class="button__icon fas fa-chevron-right"></i>
 				</button>
 			</div>
-			<div class="musicdiv">
-				<button class="btn" onclick="music.pause()"><i class="fa-solid fa-pause"></i></button>
-				<button class="btn" onclick="music.play()"><i class="fa-solid fa-play"></i></button>
+			<div id="musicdiv">
+				<button class="btn" id="btn-pause" onclick="music.pause()"><i class="fa-solid fa-pause"></i></button>
+				<button class="btn" id="btn-play" onclick="music.play()"><i class="fa-solid fa-play"></i></button>
 			</div>
 		</div>
 		<div class="screen__background">

@@ -1,268 +1,286 @@
 :root {
-  --zero: #000;
-  --one: #000;
-  --two: #000;
-  --three: #000;
-  --four: #000;
+    --zero: #000;
+    --one: #000;
+    --two: #000;
+    --three: #000;
+    --four: #000;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;	
-	font-family: Raleway, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Raleway, sans-serif;
 }
 
 body {
-	background: var(--two);
+    background: var(--two);
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
 }
 
 .container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
 
 .screen {
-	background: linear-gradient(90deg, var(--one), var(--three));
-	position: relative;
-	height: 600px;
-	width: 360px;
-	box-shadow: 0px 0px 24px var(--zero);
+    background: linear-gradient(90deg, var(--one), var(--three));
+    position: relative;
+    height: 600px;
+    width: 360px;
+    box-shadow: 0px 0px 24px var(--zero);
 }
 
 .screen__content {
-	z-index: 1;
-	position: relative;
-	height: 100%;
+    z-index: 1;
+    position: relative;
+    height: 100%;
 }
 
 .screen__background {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 0;
-	-webkit-clip-path: inset(0 0 0 0);
-	clip-path: inset(0 0 0 0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    -webkit-clip-path: inset(0 0 0 0);
+    clip-path: inset(0 0 0 0);
 }
 
 .shape {
-	transform: rotate(45deg);
-	position: absolute;
+    transform: rotate(45deg);
+    position: absolute;
 }
 
 .shape1 {
-	height: 520px;
-	width: 520px;
-	background: white;
-	top: -50px;
-	right: 120px;
-	border-radius: 0 72px 0 0;
+    height: 520px;
+    width: 520px;
+    background: white;
+    top: -50px;
+    right: 120px;
+    border-radius: 0 72px 0 0;
 }
 
 .shape2 {
-	height: 220px;
-	width: 220px;
-	background: var(--two);
-	top: -172px;
-	right: 0;
-	border-radius: 32px;
+    height: 220px;
+    width: 220px;
+    background: var(--two);
+    top: -172px;
+    right: 0;
+    border-radius: 32px;
 }
 
 .shape3 {
-	height: 540px;
-	width: 190px;
-	background: linear-gradient(270deg, var(--one), var(--zero));
-	top: -24px;
-	right: 0;
-	border-radius: 32px;
+    height: 540px;
+    width: 190px;
+    background: linear-gradient(270deg, var(--one), var(--zero));
+    top: -24px;
+    right: 0;
+    border-radius: 32px;
 }
 
 .shape4 {
-	height: 400px;
-	width: 200px;
-	background: var(--four);
-	top: 420px;
-	right: 50px;
-	border-radius: 60px;
+    height: 400px;
+    width: 200px;
+    background: var(--four);
+    top: 420px;
+    right: 50px;
+    border-radius: 60px;
+}
+
+.form,
+.answer {
+    width: 320px;
+    padding: 30px;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
 }
 
 .form {
-	width: 320px;
-	padding: 30px;
-	padding-top: 8.5em;
+    padding-top: 8.5em;
 }
 
 .answer {
-	width: 320px;
-	padding: 30px;
-	padding-top: 5em;
+    padding-top: 5em;
+    display: none;
 }
 
-.musicdiv {
-	padding-top: 1em auto;
-	text-align: center;
+#musicdiv {
+    padding-top: 1em auto;
+    text-align: center;
 }
 
 .form__field {
-	padding: 20px 0px;
-	position: relative;
+    padding: 20px 0px;
+    position: relative;
 }
 
 .form__icon {
-	position: absolute;
-	top: 30px;
-	color: var(--three);
+    position: absolute;
+    top: 30px;
+
 }
 
 .form__input {
-	border: none;
-	border-bottom: 2px solid var(--four);
-	background: none;
-	padding: 10px;
-	padding-left: 24px;
-	font-weight: 700;
-	width: 75%;
-	transition: .2s;
+    border: none;
+    border-bottom: 2px solid var(--four);
+    background: none;
+    padding: 10px;
+    padding-left: 24px;
+    font-weight: 700;
+    width: 75%;
+    transition: .2s;
 }
 
 .form__input:active,
 .form__input:focus,
 .form__input:hover {
-	outline: none;
-	border-bottom-color: var(--zero);
+    outline: none;
+    border-bottom-color: var(--zero);
 }
 
 .form__submit {
-	background: white;
-	font-size: 14px;
-	margin-top: 30px;
-	padding: 16px 20px;
-	border-radius: 26px;
-	border: 1px solid var(--four);
-	text-transform: uppercase;
-	font-weight: 700;
-	display: flex;
-	align-items: center;
-	width: 100%;
-	color: var(--one);
-	box-shadow: 0px 2px 2px var(--zero);
-	cursor: pointer;
-	transition: .2s;
+    background: white;
+    font-size: 14px;
+    margin-top: 30px;
+    padding: 16px 20px;
+    border-radius: 26px;
+    border: 1px solid var(--four);
+    text-transform: uppercase;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    color: var(--one);
+    box-shadow: 0px 2px 2px var(--zero);
+    cursor: pointer;
+    transition: .2s;
 }
 
 .form__submit:active,
 .form__submit:focus,
 .form__submit:hover {
-	border-color: var(--zero);
-	outline: none;
+    border-color: var(--zero);
+    outline: none;
 }
 
 .button__icon {
-	font-size: 24px;
-	margin-left: auto;
-	color: var(--three);
+    font-size: 24px;
+    margin-left: auto;
+    color: var(--three);
 }
 
 .social-form {
-	position: absolute;
-	height: 140px;
-	width: 160px;
-	text-align: center;
-	bottom: 0px;
-	right: 0px;
-	color: white;
+    position: absolute;
+    height: 140px;
+    width: 160px;
+    text-align: center;
+    bottom: 0px;
+    right: 0px;
+    color: white;
 }
 
 .social-icons {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .social-form__icon {
-	padding: 20px 10px;
-	text-decoration: none;
-	text-shadow: 0px 0px 8px var(--three);
+    padding: 20px 10px;
+    text-decoration: none;
+    text-shadow: 0px 0px 8px var(--three);
 }
 
-.fa-r{
+.fa-r {
     color: red;
 }
 
-.fa-g{
+.fa-g {
     color: green;
 }
 
-.fa-b{
+.fa-b {
     color: blue;
 }
 
-#score{
+#score {
     font-size: 5em;
 }
 
 .progress {
-  width: 100%;
-  background-color: lightgray;
-  margin-bottom: 0.5em;
-  text-align: right;
-  color: white;
+    width: 100%;
+    background-color: lightgray;
+    margin-bottom: 0.5em;
+    text-align: right;
+    color: white;
 }
 
-#redProgress, #greenProgress, #blueProgress {
-  width: 1%;
-  height: 30px;
-  font-size: 1.3em;
-  text-shadow: .1em .1em 0px rgba(0,0,0,.8);
+#redProgress,
+#greenProgress,
+#blueProgress {
+    width: 1%;
+    height: 30px;
+    font-size: 1.3em;
+    text-shadow: .1em .1em 0px rgba(0, 0, 0, .8);
 }
 
-#redProgress{
-  background-color: rgba(255,0,0,.7);
+#redProgress {
+    background-color: rgba(255, 0, 0, .7);
 }
 
-#greenProgress{
-  background-color: rgba(0,255,0,.7);
+#greenProgress {
+    background-color: rgba(0, 255, 0, .7);
 }
 
-#blueProgress{
-  background-color: rgba(0,0,255,.7);
+#blueProgress {
+    background-color: rgba(0, 0, 255, .7);
 }
 
-#lblGuess{
-  text-shadow: .07em .07em 0px rgb(255,255,255);
-  font-weight: bold;
+#lblGuess {
+    text-shadow: .07em .07em 0px rgb(255, 255, 255);
+    font-weight: bold;
 }
 
 .btn {
-  background-color: var(--zero);
-  border: none;
-  color: white;
-  padding: 1em 2em;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
+    background-color: var(--zero);
+    border: none;
+    color: white;
+    padding: 1em 2em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    /* Safari */
+    transition-duration: 0.4s;
 }
 
 .info {
-    position:fixed;
+    position: fixed;
     right: 1em;
     bottom: 1em;
 }
 
-.info h2, .info i {
-    float:left;
-    width:50%;
+.info h2,
+.info i {
+    font-size: 2em;
+    float: left;
+    width: 50%;
     padding: .5em 0;
-    text-shadow: .05em .05em .1em rgba(255,255,255,0.7);
+    text-shadow: .05em .05em .1em rgba(255, 255, 255, 0.7);
 }

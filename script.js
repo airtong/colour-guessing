@@ -9,17 +9,39 @@ const music = new Audio('sound.mp3');
 
 window.onload = function() {
     start();
-    music.loop =true;
+    music.loop = true;
     music.playbackRate = 2;
     music.pause();
-    music.volume = 0.01;
+    music.volume = 0.2;
 };
 
-function start(){
-    updateColors();
+function changeOppacity(increase, id) {
+    var box = document.getElementById(id);
+    var oppArrayIncrease = ['0.1', '0.2', '0.3', '0.4', '0.5', '0.6', '0.7', '0.8', '0.9', '1'];
+    var oppArrayDecrease = ['0.9', '0.8', '0.7', '0.6', '0.5', '0.4', '0.3', '0.2', '0.1', '0'];
+    if (increase)
+        oppArray = oppArrayIncrease;
+    else
+        oppArray = oppArrayDecrease;
 
-    document.getElementById('answer').style.display = 'none';
-    document.getElementById('form').style.display = 'block';
+    var x = 0;
+    (function next() {
+        box.style.opacity = oppArray[x];
+        if (++x < oppArray.length) {
+            setTimeout(next, 5);
+        }
+    })();
+
+    if (increase)
+        box.style.display = 'block';
+    else
+        box.style.display = 'none';
+}
+
+function start() {
+    changeOppacity(false, 'answer');
+    changeOppacity(true, 'form');
+    updateColors();
 
     document.getElementById('redGuess').value = 0;
     document.getElementById('greenGuess').value = 0;
@@ -27,8 +49,8 @@ function start(){
 
     document.body.style.background = 'var(--two)';
 
-    document.getElementById("highScore").innerHTML = parseInt(highScore);
-    document.getElementById("roundCount").innerHTML = roundCount;
+    document.getElementById('highScore').innerHTML = parseInt(highScore);
+    document.getElementById('roundCount').innerHTML = roundCount;
 }
 
 function getJson(red, green, blue) {
@@ -66,19 +88,35 @@ function updateColors() {
 function verifyGuess(id) {
     var guess = parseInt(document.getElementById(id).value);
 
-    if(guess < 0)
+    if (guess < 0)
         guess = 0;
-    else if(guess > 255 || isNaN(guess))
+    else if (guess > 255 || isNaN(guess))
         guess = 255
     return guess;
 }
 
-function getScore(redGuess, greenGuess, blueGuess){
+function getScore(redGuess, greenGuess, blueGuess) {
     var redDif = Math.abs(g_red - redGuess);
     var greenDif = Math.abs(g_green - greenGuess);
     var blueDif = Math.abs(g_blue - blueGuess);
 
     return parseInt(100 - ((redDif + greenDif + blueDif) / (2.55 * 3)));
+}
+
+function updateScore(start, end, duration) {
+    var obj = document.getElementById('score');
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+
+        obj.innerHTML = Math.floor(progress * (end - start) + start);
+
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
 }
 
 function verifyAnswer() {
@@ -88,39 +126,39 @@ function verifyAnswer() {
 
     var score = getScore(redGuess, greenGuess, blueGuess);
 
-    document.getElementById('score').innerHTML = score;
-
-    if(score>highScore)
+    if (score > highScore)
         highScore = score;
     roundCount += 1;
 
-    document.getElementById('form').style.display = 'none';
-    document.getElementById('answer').style.display = 'block';
+    changeOppacity(false, 'form');
+    changeOppacity(true, 'answer');
 
-    movePercentageBar(1,g_red);
-    movePercentageBar(2,g_green);
-    movePercentageBar(3,g_blue);
+    movePercentageBar(1, g_red);
+    movePercentageBar(2, g_green);
+    movePercentageBar(3, g_blue);
 
-    document.getElementById('lblGuess').innerHTML = 'Seu palpite foi: (' + redGuess + ',' + greenGuess + ',' + blueGuess + ')';
+    document.getElementById('lblGuess').innerHTML = 'It was your guess: (' + redGuess + ',' + greenGuess + ',' + blueGuess + ')';
 
-    var goalRGB = 'rgb('+g_red+','+g_green+','+g_blue+')';
-    var guessRGB = 'rgb('+redGuess+','+greenGuess+','+blueGuess+')';
+    var goalRGB = 'rgb(' + g_red + ',' + g_green + ',' + g_blue + ')';
+    var guessRGB = 'rgb(' + redGuess + ',' + greenGuess + ',' + blueGuess + ')';
 
-    document.body.style.background = 'linear-gradient(135deg,'+goalRGB+' 50%,'+guessRGB+' 50%)  no-repeat fixed center';
+    document.body.style.background = 'linear-gradient(135deg,' + goalRGB + ' 50%,' + guessRGB + ' 50%)  no-repeat fixed center';
+
+    updateScore(0, score, 30 * score);
 }
 
 function movePercentageBar(colour, newPosition) {
-    var percentage = parseInt(newPosition/2.55);
+    var percentage = parseInt(newPosition / 2.55);
     var i = 0;
     if (i == 0) {
         i = 1;
 
         var elem;
-        if(colour==1)
+        if (colour == 1)
             elem = document.getElementById('redProgress');
-        else if(colour==2)
+        else if (colour == 2)
             elem = document.getElementById('greenProgress');
-        else if(colour==3)
+        else if (colour == 3)
             elem = document.getElementById('blueProgress');
 
         var width = 1;
@@ -135,6 +173,6 @@ function movePercentageBar(colour, newPosition) {
                 elem.style.width = width + '%';
             }
         }
-        elem.innerHTML = '<b>'+newPosition+'</b>';
+        elem.innerHTML = '<b>' + newPosition + '</b>';
     }
 }
