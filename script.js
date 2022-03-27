@@ -2,8 +2,16 @@ let g_red = '#red';
 let g_green = '#green';
 let g_blue = '#blue';
 
+let g_lastGuess;
+
 let roundCount = 0;
 let highScore = 0;
+
+let lbl_btnSendGuess = 'Send guess';
+let lbl_btnTryAgain = 'Try again';
+let lbl_yourScore = 'Your score: ';
+let lbl_yourGuess = 'It was your guess: ';
+let g_language = 'en';
 
 const music = new Audio('sound.mp3');
 
@@ -14,6 +22,35 @@ window.onload = function() {
     music.pause();
     music.volume = 0.2;
 };
+
+function changeLanguage(){
+    if(g_language == 'en'){
+        g_language = 'pt';
+        lbl_btnSendGuess = 'Enviar palpite';
+        lbl_btnTryAgain = 'Tentar novamente';
+        lbl_yourScore = 'Sua pontuação: ';
+        lbl_yourGuess = 'Seu palpite: ';
+    }
+    else if(g_language == 'pt'){
+        g_language = 'es';
+        lbl_btnSendGuess = 'Enviar conjetura';
+        lbl_btnTryAgain = 'Intentar otra vez';
+        lbl_yourScore = 'Tu puntuación: ';
+        lbl_yourGuess = 'Fue tu suposición: ';
+    }
+    else if(g_language == 'es'){
+        g_language = 'en';
+        lbl_btnSendGuess = 'Send guess';
+        lbl_btnTryAgain = 'Try again';
+        lbl_yourScore = 'Your score: ';
+        lbl_yourGuess = 'It was your guess: ';
+    }
+
+    document.getElementById('btnSendGuess').innerHTML = lbl_btnSendGuess;
+    document.getElementById('btnTryAgain').innerHTML = lbl_btnTryAgain;
+    document.getElementById('lblYourScore').innerHTML = lbl_yourScore;
+    document.getElementById('lblGuess').innerHTML = lbl_yourGuess + g_lastGuess;
+}
 
 function changeOppacity(increase, id) {
     var box = document.getElementById(id);
@@ -137,7 +174,8 @@ function verifyAnswer() {
     movePercentageBar(2, g_green);
     movePercentageBar(3, g_blue);
 
-    document.getElementById('lblGuess').innerHTML = 'It was your guess: (' + redGuess + ',' + greenGuess + ',' + blueGuess + ')';
+    g_lastGuess = '(' + redGuess + ',' + greenGuess + ',' + blueGuess + ')';
+    document.getElementById('lblGuess').innerHTML = lbl_yourGuess + g_lastGuess;
 
     var goalRGB = 'rgb(' + g_red + ',' + g_green + ',' + g_blue + ')';
     var guessRGB = 'rgb(' + redGuess + ',' + greenGuess + ',' + blueGuess + ')';

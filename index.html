@@ -16,9 +16,14 @@
        @vicblima ♥ for the project idea -->
 </head>
 <body>
-<div class="info">
+<div class="info info-lang">
+	<i class="fa-solid fa-earth-americas" onclick="changeLanguage();"></i>
+</div>
+<div class="info info-left">
 	<i class="fa-solid fa-star-half-stroke"></i>
 	<h2 id="highScore">0</h2>
+</div>
+<div class="info info-right">
 	<i class="fa-solid fa-flag"></i>
 	<h2 id="roundCount">0</h2>
 </div>
@@ -32,20 +37,20 @@
 				</div>
 				<div class="form__field">
 					<i class="form__icon fa-solid fa-g"></i>
-					<input type="number" class="form__input" id="greenGuess" placeholder="Green" value=0>
+					<input type="number" class="form__input" id="greenGuess" placeholder="Green" value=0 max=255 min=0>
 				</div>
 				<div class="form__field">
 					<i class="form__icon fa-solid fa-b"></i>
-					<input type="number" class="form__input" id="blueGuess" placeholder="Blue" value=0>
+					<input type="number" class="form__input" id="blueGuess" placeholder="Blue" value=0 max=255 min=0>
 				</div>
 				<button class="button form__submit" onclick="verifyAnswer();">
-					<span class="button__text">Send guess</span>
+					<span class="button__text" id="btnSendGuess">Send guess</span>
 					<i class="button__icon fas fa-chevron-right"></i>
 				</button>
 			</div>
 			<div class="answer" id="answer">
 				<div class="form__field">
-					<h2>Your score: </h2>
+					<h2 id="lblYourScore">Your score:</h2>
 					<h1 id="score"></h1>
 					<div class="progress">
 						<div id="redProgress"></div>
@@ -59,7 +64,7 @@
 				</div>
 				<p id="lblGuess"></p>
 				<button class="button form__submit" onclick="start();">
-					<span class="button__text">Try again</span>
+					<span class="button__text" id="btnTryAgain">Try again</span>
 					<i class="button__icon fas fa-chevron-right"></i>
 				</button>
 			</div>
