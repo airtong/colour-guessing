@@ -222,3 +222,8 @@ body {
 #blueProgress{
   background-color: rgba(0,0,255,.7);
 }
+
+#lblGuess{
+  text-shadow: .07em .07em 0px rgb(255,255,255);
+  font-weight: bold;
+}

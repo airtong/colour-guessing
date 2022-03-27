@@ -14,7 +14,7 @@ function getJson(red, green, blue) {
     var url = baseURL + red + ',' + green + ',' + blue + finalURL;
     console.log(url);
     var httpreq = new XMLHttpRequest(); // a new request
-    httpreq.open("GET", url, false);
+    httpreq.open('GET', url, false);
     httpreq.send(null);
     return httpreq.responseText;
 }
@@ -38,15 +38,22 @@ function updateColors() {
     g_blue = json_obj.colors[2].rgb.b;
 }
 
-function seeAnswer() {
-    console.log(g_red + ',' + g_green + ',' + g_blue);
+function verifyGuess(guess) {
+    if(guess < 0)
+        guess = 0;
+    else if(guess > 255 || isNaN(guess))
+        guess = 255
+    return guess;
 }
 
 function verifyAnswer() {
-    var redGuess = document.getElementById("redGuess").value;
-    var greenGuess = document.getElementById("greenGuess").value;
-    var blueGuess = document.getElementById("blueGuess").value;
-    seeAnswer();
+    var redGuess = parseInt(document.getElementById('redGuess').value);
+    var greenGuess = parseInt(document.getElementById('greenGuess').value);
+    var blueGuess = parseInt(document.getElementById('blueGuess').value);
+
+    redGuess = verifyGuess(redGuess);
+    greenGuess = verifyGuess(greenGuess);
+    blueGuess = verifyGuess(blueGuess);
 
     var redDif = Math.abs(g_red - redGuess);
     var greenDif = Math.abs(g_green - greenGuess);
@@ -57,13 +64,19 @@ function verifyAnswer() {
     document.getElementById('score').innerHTML = score;
 
     var form = document.getElementById('form');
-    form.style.display = "none";
+    form.style.display = 'none';
     var answer = document.getElementById('answer');
-    answer.style.display = "block";
+    answer.style.display = 'block';
 
     move(1,g_red);
     move(2,g_green);
     move(3,g_blue);
+
+    document.getElementById('lblGuess').innerHTML = 'Seu palpite foi: (' + redGuess + ',' + greenGuess + ',' + blueGuess + ')';
+
+    var goalRGB = 'rgb('+g_red+','+g_green+','+g_blue+')';
+    var guessRGB = 'rgb('+redGuess+','+greenGuess+','+blueGuess+')';
+    document.body.style.background = 'linear-gradient(135deg,'+goalRGB+' 50%,'+guessRGB+' 50%)';
 }
 
 
@@ -75,11 +88,11 @@ function move(colour, newPosition) {
 
         var elem;
         if(colour==1)
-            elem = document.getElementById("redProgress");
+            elem = document.getElementById('redProgress');
         else if(colour==2)
-            elem = document.getElementById("greenProgress");
+            elem = document.getElementById('greenProgress');
         else if(colour==3)
-            elem = document.getElementById("blueProgress");
+            elem = document.getElementById('blueProgress');
 
         var width = 1;
         var id = setInterval(frame, 10);
@@ -90,10 +103,10 @@ function move(colour, newPosition) {
                 i = 0;
             } else {
                 width++;
-                elem.style.width = width + "%";
+                elem.style.width = width + '%';
             }
         }
 
-        elem.innerHTML = "<b>"+newPosition+"</b>";
+        elem.innerHTML = '<b>'+newPosition+'</b>';
     }
 }
