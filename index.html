@@ -14,6 +14,14 @@
 		@vicblima ♥ for the project idea -->
 </head>
 <body>
+
+<div class="info">
+	<i class="fa-solid fa-star-half-stroke"></i>
+	<h2 id="highScore">0</h2>
+	<i class="fa-solid fa-flag"></i>
+	<h2 id="roundCount">0</h2>
+</div>
+
 <div class="container">
 	<div class="screen">
 		<div class="screen__content">
@@ -40,23 +48,26 @@
 				<div class="form__field">
 					<h2>Sua pontuação é: </h2>
 					<h1 id="score">18</h1>
-					<div id="progress">
+					<div class="progress">
 						<div id="redProgress"><b>365</b></div>
 					</div>
-					<div id="progress">
+					<div class="progress">
 						<div id="greenProgress"><b>365</b></div>
 					</div>
-					<div id="progress">
+					<div class="progress">
 						<div id="blueProgress"><b>365</b></div>
 					</div>
 				</div>
 				<p id="lblGuess">Seu palpite foi:</p>
-				<button class="button form__submit" onclick="window.location.reload();">
+				<button class="button form__submit" onclick="start();">
 					<span class="button__text">Tentar novamente</span>
 					<i class="button__icon fas fa-chevron-right"></i>
 				</button>
 			</div>
-
+			<div class="musicdiv">
+				<button class="btn" onclick="music.pause()"><i class="fa-solid fa-pause"></i></button>
+				<button class="btn" onclick="music.play()"><i class="fa-solid fa-play"></i></button>
+			</div>
 		</div>
 		<div class="screen__background">
 			<span class="shape shape4"></span>

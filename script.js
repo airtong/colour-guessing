@@ -1,10 +1,35 @@
-window.onload = function() {
-    updateColors();
-};
-
 let g_red = '#red';
 let g_green = '#green';
 let g_blue = '#blue';
+
+let roundCount = 0;
+let highScore = 0;
+
+const music = new Audio('sound.mp3');
+
+window.onload = function() {
+    start();
+    music.loop =true;
+    music.playbackRate = 2;
+    music.pause();
+    music.volume = 0.01;
+};
+
+function start(){
+    updateColors();
+
+    document.getElementById('answer').style.display = 'none';
+    document.getElementById('form').style.display = 'block';
+
+    document.getElementById('redGuess').value = 0;
+    document.getElementById('greenGuess').value = 0;
+    document.getElementById('blueGuess').value = 0;
+
+    document.body.style.background = 'var(--two)';
+
+    document.getElementById("highScore").innerHTML = parseInt(highScore);
+    document.getElementById("roundCount").innerHTML = roundCount;
+}
 
 function getJson(red, green, blue) {
     var baseURL = 'https://www.thecolorapi.com/scheme?rgb=(';
@@ -12,6 +37,7 @@ function getJson(red, green, blue) {
 
     var finalURL = ')&mode=' + mode + '&count=5&format=json';
     var url = baseURL + red + ',' + green + ',' + blue + finalURL;
+
     var httpreq = new XMLHttpRequest(); // a new request
     httpreq.open('GET', url, false);
     httpreq.send(null);
@@ -37,7 +63,9 @@ function updateColors() {
     g_blue = json_obj.colors[2].rgb.b;
 }
 
-function verifyGuess(guess) {
+function verifyGuess(id) {
+    var guess = parseInt(document.getElementById(id).value);
+
     if(guess < 0)
         guess = 0;
     else if(guess > 255 || isNaN(guess))
@@ -45,41 +73,43 @@ function verifyGuess(guess) {
     return guess;
 }
 
-function verifyAnswer() {
-    var redGuess = parseInt(document.getElementById('redGuess').value);
-    var greenGuess = parseInt(document.getElementById('greenGuess').value);
-    var blueGuess = parseInt(document.getElementById('blueGuess').value);
-
-    redGuess = verifyGuess(redGuess);
-    greenGuess = verifyGuess(greenGuess);
-    blueGuess = verifyGuess(blueGuess);
-
+function getScore(redGuess, greenGuess, blueGuess){
     var redDif = Math.abs(g_red - redGuess);
     var greenDif = Math.abs(g_green - greenGuess);
     var blueDif = Math.abs(g_blue - blueGuess);
 
-    var score = parseInt(100 - ((redDif + greenDif + blueDif) / (2.55 * 3)));
+    return parseInt(100 - ((redDif + greenDif + blueDif) / (2.55 * 3)));
+}
+
+function verifyAnswer() {
+    var redGuess = verifyGuess('redGuess');
+    var greenGuess = verifyGuess('greenGuess');
+    var blueGuess = verifyGuess('blueGuess');
+
+    var score = getScore(redGuess, greenGuess, blueGuess);
 
     document.getElementById('score').innerHTML = score;
 
-    var form = document.getElementById('form');
-    form.style.display = 'none';
-    var answer = document.getElementById('answer');
-    answer.style.display = 'block';
+    if(score>highScore)
+        highScore = score;
+    roundCount += 1;
 
-    move(1,g_red);
-    move(2,g_green);
-    move(3,g_blue);
+    document.getElementById('form').style.display = 'none';
+    document.getElementById('answer').style.display = 'block';
+
+    movePercentageBar(1,g_red);
+    movePercentageBar(2,g_green);
+    movePercentageBar(3,g_blue);
 
     document.getElementById('lblGuess').innerHTML = 'Seu palpite foi: (' + redGuess + ',' + greenGuess + ',' + blueGuess + ')';
 
     var goalRGB = 'rgb('+g_red+','+g_green+','+g_blue+')';
     var guessRGB = 'rgb('+redGuess+','+greenGuess+','+blueGuess+')';
-    document.body.style.background = 'linear-gradient(135deg,'+goalRGB+' 50%,'+guessRGB+' 50%)';
+
+    document.body.style.background = 'linear-gradient(135deg,'+goalRGB+' 50%,'+guessRGB+' 50%)  no-repeat fixed center';
 }
 
-
-function move(colour, newPosition) {
+function movePercentageBar(colour, newPosition) {
     var percentage = parseInt(newPosition/2.55);
     var i = 0;
     if (i == 0) {
@@ -105,7 +135,6 @@ function move(colour, newPosition) {
                 elem.style.width = width + '%';
             }
         }
-
         elem.innerHTML = '<b>'+newPosition+'</b>';
     }
 }
