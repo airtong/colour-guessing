@@ -12,7 +12,6 @@ function getJson(red, green, blue) {
 
     var finalURL = ')&mode=' + mode + '&count=5&format=json';
     var url = baseURL + red + ',' + green + ',' + blue + finalURL;
-    console.log(url);
     var httpreq = new XMLHttpRequest(); // a new request
     httpreq.open('GET', url, false);
     httpreq.send(null);
